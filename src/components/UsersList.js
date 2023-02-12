@@ -11,8 +11,8 @@ export default function UsersList() {
     dispatch(fetchUsers());
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  function handleDelete() {
-    dispatch(deleteUser());
+  function handleDelete(id) {
+    dispatch(deleteUser(id));
   }
 
   if (isLoading) {
@@ -21,10 +21,11 @@ export default function UsersList() {
   if (error) {
     return <div>Error fetching data...</div>;
   }
+
   const renderedUsers = data.map((user) => (
     <div key={user._id}>
       <div>{`${user.firstName} ${user.lastName}`}</div>
-      <button onClick={handleDelete}>delete user</button>
+      <button onClick={() => handleDelete(user._id)}>delete user</button>
     </div>
   ));
   return (
