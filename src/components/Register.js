@@ -1,5 +1,7 @@
 import { Form, Formik, useField } from "formik";
 import * as Yup from "yup";
+import { useDispatch } from "react-redux";
+import { addUser } from "../store/thunks/addUser";
 
 function MyTextInput({ label, ...props }) {
   const [field, meta] = useField(props);
@@ -15,43 +17,39 @@ function MyTextInput({ label, ...props }) {
 }
 
 export default function RegisterForm() {
+  const dispatch = useDispatch();
+
+  async function handleRegister(values, onSubmitProps) {
+    dispatch(addUser(values));
+    onSubmitProps.resetForm();
+  }
+
   return (
-    <>
-      <Formik
-        initialValues={{ firstName: "", lastName: "" }}
-        validationSchema={Yup.object({
-          firstName: Yup.string()
-            .max(15, "Must be 15 characters or less")
-            .required("Required"),
-          lastName: Yup.string()
-            .max(15, "Must be 15 characters or less")
-            .required("Required"),
-        })}
-        onSubmit={(values, { setSubmitting }) => {
-          setTimeout(() => {
-            alert(JSON.stringify(values, null, 2));
-            setSubmitting(false);
-          }, 400);
-        }}
-      >
-        <Form>
-          <MyTextInput
-            label="First Name"
-            name="firstName"
-            type="text"
-            placeholder="Mr"
-          />
+    <Formik
+      onSubmit={handleRegister}
+      initialValues={{ firstName: "", lastName: "" }}
+      validationSchema={Yup.object({
+        firstName: Yup.string().required("Required"),
+        lastName: Yup.string().required("Required"),
+      })}
+    >
+      <Form>
+        <MyTextInput
+          label="First Name"
+          name="firstName"
+          type="text"
+          placeholder="Mr"
+        />
 
-          <MyTextInput
-            label="Last Name"
-            name="lastName"
-            type="text"
-            placeholder="Smith"
-          />
+        <MyTextInput
+          label="Last Name"
+          name="lastName"
+          type="text"
+          placeholder="Smith"
+        />
 
-          <button type="submit">Submit</button>
-        </Form>
-      </Formik>
-    </>
+        <button type="submit">Submit</button>
+      </Form>
+    </Formik>
   );
 }

@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchUsers, addUser } from "../store";
+import { fetchUsers, deleteUser } from "../store";
+import RegisterForm from "./Register";
 
 export default function UsersList() {
   const dispatch = useDispatch();
@@ -10,9 +11,8 @@ export default function UsersList() {
     dispatch(fetchUsers());
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  function handleAddUser() {
-    dispatch(addUser({ firstName: "hi", lastName: "bye" }));
-    console.log(addUser);
+  function handleDelete() {
+    dispatch(deleteUser());
   }
 
   if (isLoading) {
@@ -21,17 +21,15 @@ export default function UsersList() {
   if (error) {
     return <div>Error fetching data...</div>;
   }
-  console.log(data);
   const renderedUsers = data.map((user) => (
     <div key={user._id}>
       <div>{`${user.firstName} ${user.lastName}`}</div>
+      <button onClick={handleDelete}>delete user</button>
     </div>
   ));
   return (
     <div>
-      <div>
-        <button onClick={handleAddUser}>+ Add User</button>
-      </div>
+      <RegisterForm />
       {renderedUsers}
     </div>
   );
