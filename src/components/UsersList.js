@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUsers, deleteUser } from "../store";
+import UpdateForm from "./UpdateUser";
 import RegisterForm from "./Register";
 
 export default function UsersList() {
@@ -26,11 +27,14 @@ export default function UsersList() {
     <div key={user._id}>
       <div>{`${user.firstName} ${user.lastName}`}</div>
       <button onClick={() => handleDelete(user._id)}>delete user</button>
+      <UpdateForm userId={user._id} />
     </div>
   ));
   return (
     <div>
-      <RegisterForm />
+      <div className="mb-5">
+        <RegisterForm />
+      </div>
       {renderedUsers}
     </div>
   );
