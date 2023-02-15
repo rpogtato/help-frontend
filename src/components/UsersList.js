@@ -10,10 +10,12 @@ export default function UsersList() {
 
   useEffect(() => {
     dispatch(fetchUsers());
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [dispatch]);
 
   function handleDelete(id) {
-    dispatch(deleteUser(id));
+    dispatch(deleteUser(id)).then(() => {
+      dispatch(fetchUsers());
+    });
   }
 
   if (isLoading) {

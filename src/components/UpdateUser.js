@@ -1,6 +1,6 @@
 import { Form, Formik, useField } from "formik";
 import { useDispatch } from "react-redux";
-import { updateUser } from "../store";
+import { updateUser, fetchUsers } from "../store";
 
 function MyTextInput({ label, ...props }) {
   const [field, meta] = useField(props);
@@ -19,7 +19,9 @@ export default function UpdateForm({ userId }) {
   const dispatch = useDispatch();
 
   async function handleUpdate(values, onSubmitProps) {
-    dispatch(updateUser({ userId, values }));
+    dispatch(updateUser({ userId, values })).then(() => {
+      dispatch(fetchUsers());
+    });
     onSubmitProps.resetForm();
   }
 
