@@ -24,7 +24,6 @@ export default function UsersList() {
       </div>
     ));
   }
-  console.log(data);
 
   return (
     <div>

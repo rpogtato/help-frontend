@@ -1,4 +1,5 @@
 import { Form, Formik, useField } from "formik";
+import { useUpdateUserMutation } from "../store";
 import { useDispatch } from "react-redux";
 import { updateUser, fetchUsers } from "../store";
 
@@ -17,11 +18,13 @@ function MyTextInput({ label, ...props }) {
 
 export default function UpdateForm({ userId }) {
   const dispatch = useDispatch();
+  const [updateUser] = useUpdateUserMutation();
 
   async function handleUpdate(values, onSubmitProps) {
-    dispatch(updateUser({ userId, values })).then(() => {
-      dispatch(fetchUsers());
-    });
+    // dispatch(updateUser({ userId, values })).then(() => {
+    //   dispatch(fetchUsers());
+    // });
+    updateUser({ userId, values });
     onSubmitProps.resetForm();
   }
 

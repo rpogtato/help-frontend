@@ -46,7 +46,10 @@ export const userApi = createApi({
           return {
             url: `/users/${userId}/update`,
             method: "PATCH",
-            body: { values },
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(values),
           };
         },
       }),
