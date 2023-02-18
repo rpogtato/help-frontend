@@ -13,8 +13,51 @@ export const userApi = createApi({
           };
         },
       }),
+      getUser: builder.query({
+        query: (userId) => {
+          return {
+            url: `/users/${userId}`,
+            method: "GET",
+          };
+        },
+      }),
+      addUser: builder.mutation({
+        query: (values) => {
+          return {
+            url: "/users/register",
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(values),
+          };
+        },
+      }),
+      deleteUser: builder.mutation({
+        query: (userId) => {
+          return {
+            url: `/users/${userId}/delete`,
+            method: "DELETE",
+          };
+        },
+      }),
+      updateUser: builder.mutation({
+        query: ({ userId, values }) => {
+          return {
+            url: `/users/${userId}/update`,
+            method: "PATCH",
+            body: { values },
+          };
+        },
+      }),
     };
   },
 });
 
-export const { useGetUsersQuery } = userApi;
+export const {
+  useGetUsersQuery,
+  useGetUserQuery,
+  useAddUserMutation,
+  useDeleteUserMutation,
+  useUpdateUserMutation,
+} = userApi;

@@ -1,7 +1,8 @@
 import { Form, Formik, useField } from "formik";
 import * as Yup from "yup";
-import { useDispatch } from "react-redux";
-import { addUser } from "../store/thunks/addUser";
+import { useAddUserMutation } from "../store";
+// import { useDispatch } from "react-redux";
+// import { addUser } from "../store/thunks/addUser";
 
 function MyTextInput({ label, ...props }) {
   const [field, meta] = useField(props);
@@ -17,10 +18,10 @@ function MyTextInput({ label, ...props }) {
 }
 
 export default function RegisterForm() {
-  const dispatch = useDispatch();
+  const [addUser] = useAddUserMutation();
 
   async function handleRegister(values, onSubmitProps) {
-    dispatch(addUser(values));
+    addUser(values);
     onSubmitProps.resetForm();
   }
 

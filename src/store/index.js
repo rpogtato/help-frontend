@@ -19,4 +19,10 @@ export * from "./thunks/addUser";
 export * from "./thunks/deleteUser";
 export * from "./thunks/updateUser";
 
-export { useGetUsersQuery } from "./apis/usersApi";
+export {
+  useGetUsersQuery,
+  useGetUserQuery,
+  useAddUserMutation,
+  useDeleteUserMutation,
+  useUpdateUserMutation,
+} from "./apis/usersApi";
