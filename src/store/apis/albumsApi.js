@@ -39,3 +39,6 @@ export const albumsApi = createApi({
     };
   },
 });
+
+export const { useGetAlbumQuery, useDeleteAlbumMutation, useAddAlbumMutation } =
+  albumsApi;

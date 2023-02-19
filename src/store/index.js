@@ -26,3 +26,9 @@ export {
   useDeleteUserMutation,
   useUpdateUserMutation,
 } from "./apis/usersApi";
+
+export {
+  useGetAlbumQuery,
+  useDeleteAlbumMutation,
+  useAddAlbumMutation,
+} from "./apis/albumsApi";
