@@ -22,7 +22,7 @@ export const albumsApi = createApi({
         },
       }),
       addAlbum: builder.mutation({
-        query: (values) => {
+        query: ({ values, userId }) => {
           return {
             url: `/albums/post`,
             method: "POST",
@@ -30,8 +30,8 @@ export const albumsApi = createApi({
               "Content-Type": "application/json",
             },
             body: JSON.stringify({
-              title: values.title,
-              userId: values._id,
+              title: values,
+              userId: userId,
             }),
           };
         },

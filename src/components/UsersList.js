@@ -1,6 +1,7 @@
 import { useGetUsersQuery, useDeleteUserMutation } from "../store";
 import UpdateForm from "./UpdateUser";
 import RegisterForm from "./Register";
+import AlbumForm from "./CreateAlbum";
 
 export default function UsersList() {
   const { data, error, isLoading } = useGetUsersQuery();
