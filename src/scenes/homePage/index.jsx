@@ -1,11 +1,13 @@
 import { useGetUsersQuery, useDeleteUserMutation } from "../../store";
 import UpdateForm from "../../components/UpdateUser";
 import RegisterForm from "../../components/Register";
-import AlbumForm from "../../components/CreateAlbum";
+import { AlbumPage } from "../albumPage";
+import { useNavigate } from "react-router-dom";
 
 export default function UsersList() {
   const { data, error, isLoading } = useGetUsersQuery();
   const [deleteUser] = useDeleteUserMutation();
+  const navigate = useNavigate();
 
   function handleDelete(userId) {
     deleteUser(userId);
@@ -19,7 +21,9 @@ export default function UsersList() {
   } else {
     content = data.map((user) => (
       <div key={user._id}>
-        <div>{`${user.firstName} ${user.lastName}`}</div>
+        <div
+          onClick={() => navigate(`/profile/${user._id}`)}
+        >{`${user.firstName} ${user.lastName}`}</div>
         <button onClick={() => handleDelete(user._id)}>delete user</button>
         <UpdateForm userId={user._id} />
       </div>

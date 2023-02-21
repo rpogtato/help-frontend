@@ -1,6 +1,7 @@
 import UsersList from "./scenes/homePage";
 import { UserPage } from "./scenes/userPage";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { AlbumPage } from "./scenes/albumPage";
 
 function App() {
   return (
@@ -8,7 +9,8 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/users" element={<UsersList />} />
-          <Route path="/users/:userId" element={<UserPage />} />
+          <Route path="/albums/:userId" element={<AlbumPage />} />
+          <Route path="/profile/:userId" element={<UserPage />} />
         </Routes>
       </BrowserRouter>
     </div>
