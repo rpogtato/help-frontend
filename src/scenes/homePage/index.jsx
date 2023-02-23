@@ -1,7 +1,6 @@
 import { useGetUsersQuery, useDeleteUserMutation } from "../../store";
 import UpdateForm from "../../components/UpdateUser";
 import RegisterForm from "../../components/Register";
-
 import { useNavigate } from "react-router-dom";
 
 export default function UsersList() {
