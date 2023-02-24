@@ -1,16 +1,12 @@
-import { useGetUsersQuery, useDeleteUserMutation } from "../../store";
+import { useGetUsersQuery } from "../../store";
 import UpdateForm from "../../components/UpdateUser";
 import RegisterForm from "../../components/Register";
 import { useNavigate } from "react-router-dom";
 
 export default function UsersList() {
   const { data, error, isLoading } = useGetUsersQuery();
-  const [deleteUser] = useDeleteUserMutation();
-  const navigate = useNavigate();
 
-  function handleDelete(userId) {
-    deleteUser(userId);
-  }
+  const navigate = useNavigate();
 
   let content;
   if (isLoading) {
@@ -23,7 +19,7 @@ export default function UsersList() {
         <div
           onClick={() => navigate(`/profile/${user._id}`)}
         >{`${user.firstName} ${user.lastName}`}</div>
-        <button onClick={() => handleDelete(user._id)}>delete user</button>
+
         <UpdateForm userId={user._id} />
       </div>
     ));
