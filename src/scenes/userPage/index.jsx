@@ -5,6 +5,7 @@ import {
   useDeleteUserMutation,
 } from "../../store";
 import { useNavigate } from "react-router-dom";
+import AlbumForm from "../../components/CreateAlbum";
 
 export function UserPage() {
   const navigate = useNavigate();
@@ -36,12 +37,12 @@ export function UserPage() {
           <div>{data.firstName}'s profile page</div>
           <button onClick={() => navigate("/users")}>return</button>
           <button onClick={() => handleDelete(data._id)}>delete user</button>
+          <hr></hr>
+          <AlbumForm userId={data._id} />
         </>
       ) : (
         <div>Loading data...</div>
       )}
-      <hr></hr>
-
       <div>{content}</div>
     </div>
   );

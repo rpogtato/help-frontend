@@ -26,19 +26,13 @@ export default function AlbumForm({ userId }) {
   }
 
   return (
-    <Formik
-      onSubmit={handleAddAlbum}
-      initialValues={{ title: "" }}
-      validationSchema={Yup.object({
-        title: Yup.string().required("Required"),
-      })}
-    >
+    <Formik onSubmit={handleAddAlbum} initialValues={{ title: "" }}>
       <Form>
         <MyTextInput
-          label="Title"
+          label="add album"
           name="title"
           type="text"
-          placeholder="title"
+          placeholder="Title"
         />
         <button type="submit">Submit</button>
       </Form>
