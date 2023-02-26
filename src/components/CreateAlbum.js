@@ -1,8 +1,5 @@
 import { Form, Formik, useField } from "formik";
-import * as Yup from "yup";
 import { useAddAlbumMutation } from "../store";
-// import { useDispatch } from "react-redux";
-// import { addUser } from "../store/thunks/addUser";
 
 function MyTextInput({ label, ...props }) {
   const [field, meta] = useField(props);

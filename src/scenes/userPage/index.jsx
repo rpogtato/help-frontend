@@ -6,6 +6,7 @@ import {
 } from "../../store";
 import { useNavigate } from "react-router-dom";
 import AlbumForm from "../../components/CreateAlbum";
+import { DeleteAlbum } from "../../components/DeleteAlbum";
 
 export function UserPage() {
   const navigate = useNavigate();
@@ -14,6 +15,11 @@ export function UserPage() {
   const { data } = useGetUserQuery(userId);
   const { data: albumData, isLoading, error } = useGetAlbumQuery(userId);
 
+  function handleDelete(userId) {
+    deleteUser(userId);
+    navigate("/users");
+  }
+
   let content;
   if (isLoading) {
     content = <div>Loading...</div>;
@@ -21,13 +27,15 @@ export function UserPage() {
     content = <div>Error loading data...</div>;
   } else {
     content = albumData.map((album) => {
-      return <div key={album._id}>{album.title}</div>;
+      return (
+        <div key={album._id}>
+          <div onClick={() => navigate(`/${userId}/albums/${album.title}`)}>
+            {album.title}
+          </div>
+          <DeleteAlbum albumId={album._id} />
+        </div>
+      );
     });
-  }
-
-  function handleDelete(userId) {
-    deleteUser(userId);
-    navigate("/users");
   }
 
   return (

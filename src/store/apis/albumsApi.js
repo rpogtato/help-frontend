@@ -18,6 +18,7 @@ export const albumsApi = createApi({
           return {
             url: `/albums/${albumId}/delete`,
             method: "DELETE",
+            body: albumId,
           };
         },
       }),
