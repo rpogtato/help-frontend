@@ -3,6 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const userApi = createApi({
   reducerPath: "userApi",
   baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:3001" }),
+  tagTypes: ["User"],
   endpoints(builder) {
     return {
       getUsers: builder.query({
@@ -12,6 +13,10 @@ export const userApi = createApi({
             method: "GET",
           };
         },
+        providesTags: (result, error, arg) =>
+          result
+            ? [...result.map(({ id }) => ({ type: "User", id })), "User"]
+            : ["User"],
       }),
       getUser: builder.query({
         query: (userId) => {
@@ -32,6 +37,7 @@ export const userApi = createApi({
             body: JSON.stringify(values),
           };
         },
+        invalidatesTags: ["User"],
       }),
       deleteUser: builder.mutation({
         query: (userId) => {
@@ -40,6 +46,7 @@ export const userApi = createApi({
             method: "DELETE",
           };
         },
+        invalidatesTags: ["User"],
       }),
       updateUser: builder.mutation({
         query: ({ userId, values }) => {
@@ -52,6 +59,7 @@ export const userApi = createApi({
             body: JSON.stringify(values),
           };
         },
+        invalidatesTags: ["User"],
       }),
     };
   },
