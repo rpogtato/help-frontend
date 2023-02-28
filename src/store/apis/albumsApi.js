@@ -3,6 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const albumsApi = createApi({
   reducerPath: "albumsApi",
   baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:3001" }),
+  tagTypes: ["Album"],
   endpoints(builder) {
     return {
       getAlbum: builder.query({
@@ -12,6 +13,10 @@ export const albumsApi = createApi({
             method: "GET",
           };
         },
+        providesTags: (result, error, args) =>
+          result
+            ? [...result.map(({ id }) => ({ type: "Album", id })), "Album"]
+            : ["Album"],
       }),
       deleteAlbum: builder.mutation({
         query: (albumId) => {
@@ -21,6 +26,7 @@ export const albumsApi = createApi({
             body: albumId,
           };
         },
+        invalidatesTags: ["Album"],
       }),
       addAlbum: builder.mutation({
         query: ({ values, userId }) => {
@@ -33,6 +39,7 @@ export const albumsApi = createApi({
             body: values,
           };
         },
+        invalidatesTags: ["Album"],
       }),
     };
   },
