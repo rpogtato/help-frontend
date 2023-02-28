@@ -23,7 +23,9 @@ export const albumsApi = createApi({
           return {
             url: `/albums/${albumId}/delete`,
             method: "DELETE",
-            body: albumId,
+            params: {
+              albumId,
+            },
           };
         },
         invalidatesTags: ["Album"],
