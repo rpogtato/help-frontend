@@ -7,6 +7,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import AlbumForm from "../../components/CreateAlbum";
 import { DeleteAlbum } from "../../components/DeleteAlbum";
+import Button from "@mui/material/Button";
 
 export function UserPage() {
   const navigate = useNavigate();
@@ -43,8 +44,12 @@ export function UserPage() {
       {data && data.firstName ? (
         <>
           <div>{data.firstName}'s profile page</div>
-          <button onClick={() => navigate("/users")}>return</button>
-          <button onClick={() => handleDelete(data._id)}>delete user</button>
+          <Button variant="outlined" onClick={() => navigate("/users")}>
+            return
+          </Button>
+          <Button variant="outlined" onClick={() => handleDelete(data._id)}>
+            delete user
+          </Button>
           <hr></hr>
           <AlbumForm userId={data._id} />
         </>
