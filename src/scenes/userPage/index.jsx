@@ -48,6 +48,7 @@ export function UserPage() {
           <Button
             variant="outlined"
             size="small"
+            color="secondary"
             onClick={() => navigate("/users")}
           >
             return

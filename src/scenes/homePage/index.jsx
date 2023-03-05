@@ -18,7 +18,7 @@ export default function UsersList() {
     content = data.map((user) => (
       <div key={user._id}>
         <Box width="100%" onClick={() => navigate(`/profile/${user._id}`)}>
-          <Typography>{`${user.firstName} ${user.lastName}`}</Typography>
+          <Typography variant="myVariant">{`${user.firstName} ${user.lastName}`}</Typography>
         </Box>
 
         <UpdateForm userId={user._id} />
