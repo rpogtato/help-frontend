@@ -2,6 +2,7 @@ import { useGetUsersQuery } from "../../store";
 import UpdateForm from "../../components/UpdateUser";
 import RegisterForm from "../../components/Register";
 import { useNavigate } from "react-router-dom";
+import { Box, Button, Typography } from "@mui/material";
 
 export default function UsersList() {
   const { data, error, isLoading } = useGetUsersQuery();
@@ -16,9 +17,9 @@ export default function UsersList() {
   } else {
     content = data.map((user) => (
       <div key={user._id}>
-        <div
-          onClick={() => navigate(`/profile/${user._id}`)}
-        >{`${user.firstName} ${user.lastName}`}</div>
+        <Box width="100%" onClick={() => navigate(`/profile/${user._id}`)}>
+          <Typography>{`${user.firstName} ${user.lastName}`}</Typography>
+        </Box>
 
         <UpdateForm userId={user._id} />
       </div>
@@ -27,10 +28,10 @@ export default function UsersList() {
 
   return (
     <div>
-      <div className="mb-5">
+      <Box sx={{ mt: "20px", ml: "30px" }} className="mb-5">
         <RegisterForm />
-      </div>
-      {content}
+      </Box>
+      <Box sx={{ padding: 4 }}>{content}</Box>
     </div>
   );
 }
