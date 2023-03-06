@@ -1,6 +1,7 @@
 import { useGetAlbumQuery } from "../../store";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { Typography } from "@mui/material";
 
 export function AlbumPage() {
   const navigate = useNavigate();
@@ -16,7 +17,7 @@ export function AlbumPage() {
     content = data.map((album) => {
       return (
         <div key={album._id}>
-          <div>{album.title}</div>
+          <Typography>{album.title}</Typography>
         </div>
       );
     });

@@ -11,9 +11,9 @@ export default function UsersList() {
 
   let content;
   if (isLoading) {
-    content = <div>Loading...</div>;
+    content = <Typography>Loading...</Typography>;
   } else if (error) {
-    content = <div>Error fetching data...</div>;
+    content = <Typography>Error fetching data...</Typography>;
   } else {
     content = data.map((user) => (
       <div key={user._id}>

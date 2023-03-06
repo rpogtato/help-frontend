@@ -9,6 +9,7 @@ import AlbumForm from "../../components/CreateAlbum";
 import { DeleteAlbum } from "../../components/DeleteAlbum";
 import Button from "@mui/material/Button";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { Typography } from "@mui/material";
 
 export function UserPage() {
   const navigate = useNavigate();
@@ -24,16 +25,18 @@ export function UserPage() {
 
   let content;
   if (isLoading) {
-    content = <div>Loading...</div>;
+    content = <Typography>Loading...</Typography>;
   } else if (error) {
-    content = <div>Error loading data...</div>;
+    content = <Typography>Error loading data...</Typography>;
   } else {
     content = albumData.map((album) => {
       return (
         <div key={album._id}>
-          <div onClick={() => navigate(`/${userId}/albums/${album.title}`)}>
+          <Typography
+            onClick={() => navigate(`/${userId}/albums/${album.title}`)}
+          >
             {album.title}
-          </div>
+          </Typography>
           <DeleteAlbum albumId={album._id} />
         </div>
       );
@@ -44,30 +47,30 @@ export function UserPage() {
     <div>
       {data && data.firstName ? (
         <>
-          <div>{data.firstName}'s profile page</div>
+          <Typography>{data.firstName}'s profile page</Typography>
           <Button
             variant="outlined"
             size="small"
             color="secondary"
             onClick={() => navigate("/users")}
           >
-            return
+            <Typography variant="myVariant">return</Typography>
           </Button>
           <Button
             sx={{ ml: 1 }}
             variant="outlined"
-            color="error"
+            color="secondary"
             size="small"
             endIcon={<DeleteIcon />}
             onClick={() => handleDelete(data._id)}
           >
-            delete
+            <Typography variant="myVariant">delete</Typography>
           </Button>
           <hr></hr>
           <AlbumForm userId={data._id} />
         </>
       ) : (
-        <div>Loading data...</div>
+        <Typography>Loading data...</Typography>
       )}
       <div>{content}</div>
     </div>
